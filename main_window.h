@@ -1,11 +1,13 @@
 #ifndef __MAINWINDOW_H
 #define __MAINWINDOW_H
 
+#include <QMainWindow>
+#include <QObject>
+
 // Forward declarations because fancy.
-class QMainWindow;
 class QWidget;
 class FittsWidget;
-class QString
+class QString;
 
 /**
  * \class MainWindow

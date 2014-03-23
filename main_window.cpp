@@ -3,15 +3,20 @@
 //    
 //  MainWindow implementation for Part 3 of the assignment.
 
-#include "main_window.h"
 #include <QtGui>
+#include "main_window.h"
 #include "FittsWidget.h"
+#include "ExperimentSettings.h"
+#include "Experiment.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
-
-     setCentralWidget(fWid = new FittsWidget(parent));
-
-     connect (textEdit, SIGNAL(textChanged()), this, SLOT(setTextModified()));
+    setCentralWidget(fWid = new FittsWidget(parent));
+    resize(QApplication::desktop()->width(), QApplication::desktop()->height());
+    
+    Experiment experiment(fWid);
+    ExperimentSettings exp(10, 150, ExperimentSettings::BYHITS, 10);
+    experiment.addExperiment(exp);
+    experiment.run();
 }
 
 bool MainWindow::writeFile(const QString &filename, const QString &text) {

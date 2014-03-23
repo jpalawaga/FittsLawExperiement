@@ -1,11 +1,11 @@
 #ifndef __FITTSWIDGET_H
 #define __FITTSWIDGET_H
 
+#include <QtGui>
+#include "ExperimentSettings.h"
+
 // Forward declarations because fancy.
-class QMainWindow;
 class QWidget;
-class FittsWidget;
-class QString
 
 /**
  * \class FittsWidget
@@ -15,7 +15,7 @@ class QString
  * \author James Palawaga <jpalawaga@gmail.com>
  * \date March 23, 2014
  */
-class FittsWidget : public QMainWindow {
+class FittsWidget : public QWidget {
 
     Q_OBJECT
 
@@ -27,22 +27,20 @@ class FittsWidget : public QMainWindow {
          *
          * @param *parent - the parent widget to attach to.
          */
-        MainWindow(QWidget *parent = 0);
+        FittsWidget(QWidget *parent = 0);
+        void runExperiment(ExperimentSettings e);
+
+    protected:
+        void paintEvent(QPaintEvent *event);
+        void mousePressEvent(QMouseEvent * e);
+        void mouseMoveEvent(QMouseEvent * e);
 
     private:
-        FittsWidget * fWid;
-
-        /**
-         * Writes a file to the disk
-         *
-         * Will ask before overwriting a file
-         *
-         * @param filename the filename/path to write to
-         * @param text the contents to write to disk
-         *
-         * @return whether the reading/writing was successful.
-         */
-        bool writeFile(const QString &filename, const QString &text);
+        ExperimentSettings expSettings;
+        QRect A;
+        QRect B;
+        int hits;
+        int clicks;
 
 };
 
