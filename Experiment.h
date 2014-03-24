@@ -4,6 +4,7 @@
 #include <QVector>
 #include <QtGui>
 #include <QSqlDatabase>
+#include <QSqlQuery>
 #include "Test.h"
 #include "FittsWidget.h"
 
@@ -26,6 +27,7 @@ class Experiment : public QWidget {
     private:
         int experimentNumber;
         int volunteerId;
+        QSqlQuery query;
         QString name;
         FittsWidget * widget;
         QSqlDatabase db;

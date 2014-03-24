@@ -8,29 +8,12 @@ Experiment::Experiment(FittsWidget * fw, QSqlDatabase database) {
     db = database;
     widget = fw;
     experimentNumber = 0;
+    volunteerId = 0;
     bool ok;
     bool queryStatus = false;
     name = QInputDialog::getText(0, "Name", "Please enter your name:", QLineEdit::Normal, "", &ok);
-   /* 
-    QSqlQuery query(db);
-    if (db.isValid() && db.open()) {
-        qDebug() << name;
-        query.prepare("INSERT INTO volunteers (name) VALUES(:name)");
-        query.bindValue(":name", name);
-        queryStatus = query.exec();
-        qDebug() << query.lastQuery();
-        QSqlError e;
-        e=query.lastError();
-        qDebug() << e.text();
-    } else {
-        qDebug() << "DB Not open/Valid";
-        QMessageBox::warning(this, tr("Done"), tr("DB not open."));
-    }
+    query = QSqlQuery(db);
 
-    if (queryStatus) {
-        qDebug() << "STATUS";
-        volunteerId = query.lastInsertId().toInt();
-    }*/
 }
 
 void Experiment::run() {
@@ -48,6 +31,12 @@ void Experiment::insertToDatabase() {
         for (int k = 0; k < tests[j].clicks.size(); k++) {
             QSqlQuery query(db);
             if (db.open()) {
+                if (volunteerId == 0) {
+                    query.prepare("INSERT INTO volunteers (name) VALUES(:name)");
+                    query.bindValue(":name", name);
+                    query.exec();
+                    volunteerId = query.lastInsertId().toInt();
+                }
                 query.prepare("INSERT INTO experiments(volunteer_id, testno, size, distance, mouse_x, mouse_y, hit, time) VALUES(:id, :testno, :s, :d, :x, :y, :hit, :time)");
                 query.bindValue(":id", volunteerId);
                 query.bindValue(":testno", j);
