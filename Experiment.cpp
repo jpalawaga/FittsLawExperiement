@@ -11,13 +11,12 @@ Experiment::Experiment(FittsWidget * fw, QSqlDatabase database) {
     bool ok;
     bool queryStatus = false;
     name = QInputDialog::getText(0, "Name", "Please enter your name:", QLineEdit::Normal, "", &ok);
-    
+   /* 
     QSqlQuery query(db);
     if (db.isValid() && db.open()) {
-
         qDebug() << name;
-        query.prepare("INSERT INTO volunteers (name) VALUES('Will')");
-        query.bindValue(0, name);
+        query.prepare("INSERT INTO volunteers (name) VALUES(:name)");
+        query.bindValue(":name", name);
         queryStatus = query.exec();
         qDebug() << query.lastQuery();
         QSqlError e;
@@ -31,7 +30,7 @@ Experiment::Experiment(FittsWidget * fw, QSqlDatabase database) {
     if (queryStatus) {
         qDebug() << "STATUS";
         volunteerId = query.lastInsertId().toInt();
-    }
+    }*/
 }
 
 void Experiment::run() {
