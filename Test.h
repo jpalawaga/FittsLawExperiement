@@ -11,7 +11,7 @@ class Test {
 
     public:
         Test(ExperimentSettings e);
-        Test() {}
+        Test();
         QVector<DataPoint> clicks;
         void insertClick(QPoint p, int time, bool h);
         ExperimentSettings getSettings() { return expSettings; }

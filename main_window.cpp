@@ -25,9 +25,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     connect(fWid, SIGNAL(experimentComplete()), experiment, SLOT(run()));
     connect(fWid, SIGNAL(buttonClicked(QPoint, int, bool)), experiment, SLOT(registerClick(QPoint, int, bool)));
 
-    ExperimentSettings exp(10, 150, ExperimentSettings::BYHITS, 10);
-    ExperimentSettings exp2(10, 250, ExperimentSettings::BYCLICKS, 10);
-    ExperimentSettings exp3(10, 60, ExperimentSettings::BYCLICKS, 10);
+    ExperimentSettings exp("Training", 10, 150, ExperimentSettings::BYHITS, 10);
+    ExperimentSettings exp2("Test 1", 10, 250, ExperimentSettings::BYCLICKS, 10);
+    ExperimentSettings exp3("Test2", 10, 60, ExperimentSettings::BYCLICKS, 10);
     experiment->addExperiment(exp);
     experiment->addExperiment(exp2);
     experiment->addExperiment(exp3);

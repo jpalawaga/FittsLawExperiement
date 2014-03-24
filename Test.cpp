@@ -4,6 +4,10 @@
 #include "ExperimentSettings.h"
 #include "DataPoint.h"
 
+Test::Test() {
+    expSettings = ExperimentSettings("Default Test");
+}
+
 Test::Test(ExperimentSettings e) {
     expSettings = e;
 }
