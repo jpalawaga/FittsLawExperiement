@@ -1,9 +1,9 @@
 #include <QtGui>
-#include "ExperimentSettings.h"
 #include "FittsWidget.h"
 
 FittsWidget::FittsWidget(QWidget *p) {
     setMouseTracking(true);
+    update();
 }
 
 void FittsWidget::runExperiment(ExperimentSettings e) {
@@ -25,27 +25,28 @@ void FittsWidget::paintEvent(QPaintEvent * event) {
 }
 
 void FittsWidget::mousePressEvent(QMouseEvent * e) {
+    bool hit = false;
     clicks++;
 
     if (A.contains(e->pos()) || B.contains(e->pos())) {
         qDebug() << "HIT";
+        hit = true;
         hits++;
     }
-}
 
-void FittsWidget::mouseMoveEvent(QMouseEvent * e) {
-/*
-    if (expSettings->getMethod() == ExperimentSettings::BYCLICKS) {
-        if (clicks >= expSettings->getMax()) {
-            qDebug() << "Finished Click Trial";
+    emit buttonClicked (e->pos(), 0, hit);
+    
+    if (expSettings.getMethod() == ExperimentSettings::BYCLICKS) {
+        if (clicks >= expSettings.getMax()) {
+            emit experimentComplete();
         }
     }
 
-    if (expSettings->getMethod() == ExperimentSettings::BYHITS) {
-        if (hits >= expSettings->getMax()) {
-            qDebug() << "Finished Hit Trial";
+    if (expSettings.getMethod() == ExperimentSettings::BYHITS) {
+        if (hits >= expSettings.getMax()) {
+            emit experimentComplete();
+            qDebug() << "HITi";
         }
     }
-*/
 }
 

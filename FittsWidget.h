@@ -30,10 +30,13 @@ class FittsWidget : public QWidget {
         FittsWidget(QWidget *parent = 0);
         void runExperiment(ExperimentSettings e);
 
+    signals:
+        void experimentComplete();
+        void buttonClicked(QPoint p, int time, bool hit);
+
     protected:
         void paintEvent(QPaintEvent *event);
         void mousePressEvent(QMouseEvent * e);
-        void mouseMoveEvent(QMouseEvent * e);
 
     private:
         ExperimentSettings expSettings;

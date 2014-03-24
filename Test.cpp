@@ -8,8 +8,8 @@ Test::Test(ExperimentSettings e) {
     expSettings = e;
 }
 
-void Test::insertClick(QPoint p, int time) {
-    DataPoint temp(p, time);
+void Test::insertClick(QPoint p, int time, bool hit) {
+    DataPoint temp(p, time, hit);
     clicks.push_back(temp);
 }
 

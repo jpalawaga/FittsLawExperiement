@@ -13,7 +13,7 @@ class Test {
         Test(ExperimentSettings e);
         Test() {}
         QVector<DataPoint> clicks;
-        void insertClick(QPoint p, int time);
+        void insertClick(QPoint p, int time, bool h);
         ExperimentSettings getSettings() { return expSettings; }
 
     private:

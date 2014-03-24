@@ -13,10 +13,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     setCentralWidget(fWid = new FittsWidget(parent));
     resize(QApplication::desktop()->width(), QApplication::desktop()->height());
     
-    Experiment experiment(fWid);
+    Experiment * experiment = new Experiment(fWid);
+    connect(fWid, SIGNAL(experimentComplete()), experiment, SLOT(run()));
+    connect(fWid, SIGNAL(buttonClicked(QPoint p, int time, bool hit)), experiment, SLOT(registerclick(QPoint p, int t, bool h)));
+
     ExperimentSettings exp(10, 150, ExperimentSettings::BYHITS, 10);
-    experiment.addExperiment(exp);
-    experiment.run();
+    ExperimentSettings exp2(10, 250, ExperimentSettings::BYCLICKS, 10);
+    experiment->addExperiment(exp);
+    experiment->addExperiment(exp2);
+    experiment->run();
 }
 
 bool MainWindow::writeFile(const QString &filename, const QString &text) {

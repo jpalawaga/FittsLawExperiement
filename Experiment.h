@@ -2,21 +2,28 @@
 #define __EXPERIMENT_H
 
 #include <QVector>
+#include <QtGui>
 #include "Test.h"
 #include "FittsWidget.h"
 
 class QString; 
 
-class Experiment {
+class Experiment : public QWidget {
+
+    Q_OBJECT
 
     public:
         Experiment(FittsWidget * fw);
         QVector<Test> tests;
 
-        void run();
         void addExperiment(ExperimentSettings settings);
 
+    public slots:
+        void run();
+        void registerClick(QPoint p, int t, bool h);
+
     private:
+        int experimentNumber;
         QString name;
         FittsWidget * widget;
 };
