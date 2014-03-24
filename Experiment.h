@@ -14,7 +14,7 @@ class Experiment : public QWidget {
     Q_OBJECT
 
     public:
-        Experiment(FittsWidget * fw, QSqlDatabase * db);
+        Experiment(FittsWidget * fw, QSqlDatabase db);
         QVector<Test> tests;
 
         void addExperiment(ExperimentSettings settings);
@@ -25,9 +25,11 @@ class Experiment : public QWidget {
 
     private:
         int experimentNumber;
+        int volunteerId;
         QString name;
         FittsWidget * widget;
-        QSqlDatabase * db;
+        QSqlDatabase db;
+        void insertToDatabase();
 };
 
 #endif

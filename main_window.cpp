@@ -14,9 +14,9 @@
 #include <QSqlRecord>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
-    QSqlDatabase * db = new QSqlDatabase();
-    (*db) = QSqlDatabase::addDatabase("QSQLITE");
-    db->setDatabaseName("data.db");
+    QSqlDatabase db = QSqlDatabase();
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName("data.db");
 
     setCentralWidget(fWid = new FittsWidget(parent));
     resize(QApplication::desktop()->width(), QApplication::desktop()->height());
@@ -33,8 +33,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     experiment->addExperiment(exp3);
     experiment->run();
 
-    db->close();
-    delete db;
+    db.close();
 }
 
 bool MainWindow::writeFile(const QString &filename, const QString &text) {
