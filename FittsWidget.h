@@ -2,6 +2,7 @@
 #define __FITTSWIDGET_H
 
 #include <QtGui>
+#include <time.h>
 #include "ExperimentSettings.h"
 
 // Forward declarations because fancy.
@@ -44,6 +45,8 @@ class FittsWidget : public QWidget {
         QRect B;
         int hits;
         int clicks;
+        uint clock;
+        uint tempClock;
 
 };
 

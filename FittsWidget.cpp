@@ -26,14 +26,20 @@ void FittsWidget::paintEvent(QPaintEvent * event) {
 
 void FittsWidget::mousePressEvent(QMouseEvent * e) {
     bool hit = false;
+
+    if (clicks == 0) {
+        //start clock
+    }
+
     clicks++;
 
     if (A.contains(e->pos()) || B.contains(e->pos())) {
         hit = true;
         hits++;
+        // Stop timer, record time, restart timer.
     }
 
-    emit buttonClicked (e->pos(), 0, hit);
+    emit buttonClicked (e->pos(), tempClock, hit);
     
     if (expSettings.getMethod() == ExperimentSettings::BYCLICKS) {
         if (clicks >= expSettings.getMax()) {

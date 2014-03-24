@@ -3,17 +3,18 @@
 
 #include <QVector>
 #include <QtGui>
+#include <QSqlDatabase>
 #include "Test.h"
 #include "FittsWidget.h"
 
-class QString; 
+class QString;
 
 class Experiment : public QWidget {
 
     Q_OBJECT
 
     public:
-        Experiment(FittsWidget * fw);
+        Experiment(FittsWidget * fw, QSqlDatabase * db);
         QVector<Test> tests;
 
         void addExperiment(ExperimentSettings settings);
@@ -26,6 +27,7 @@ class Experiment : public QWidget {
         int experimentNumber;
         QString name;
         FittsWidget * widget;
+        QSqlDatabase * db;
 };
 
 #endif
