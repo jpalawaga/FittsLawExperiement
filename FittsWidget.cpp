@@ -29,7 +29,6 @@ void FittsWidget::mousePressEvent(QMouseEvent * e) {
     clicks++;
 
     if (A.contains(e->pos()) || B.contains(e->pos())) {
-        qDebug() << "HIT";
         hit = true;
         hits++;
     }
@@ -45,7 +44,6 @@ void FittsWidget::mousePressEvent(QMouseEvent * e) {
     if (expSettings.getMethod() == ExperimentSettings::BYHITS) {
         if (hits >= expSettings.getMax()) {
             emit experimentComplete();
-            qDebug() << "HITi";
         }
     }
 }
