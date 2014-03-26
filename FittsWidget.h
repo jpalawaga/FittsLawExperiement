@@ -45,8 +45,8 @@ class FittsWidget : public QWidget {
         QRect B;
         int hits;
         int clicks;
-        uint clock;
-        uint tempClock;
+        QTime timer;
+        int elapsed;
 
 };
 

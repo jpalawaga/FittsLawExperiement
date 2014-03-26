@@ -11,7 +11,6 @@ Experiment::Experiment(FittsWidget * fw, QSqlDatabase database) {
     experimentNumber = 0;
     volunteerId = 0;
     bool ok;
-    bool queryStatus = false;
     name = QInputDialog::getText(0, "Name", "Please enter your name:", QLineEdit::Normal, "", &ok);
     if (db.open()) {
         QSqlQuery query(db);

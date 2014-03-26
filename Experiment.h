@@ -5,6 +5,7 @@
 #include <QtGui>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QTime>
 #include "Test.h"
 #include "FittsWidget.h"
 
@@ -31,7 +32,6 @@ class Experiment : public QWidget {
         QString name;
         FittsWidget * widget;
         QSqlDatabase db;
-        void insertToDatabase();
 };
 
 #endif

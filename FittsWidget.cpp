@@ -3,6 +3,7 @@
 
 FittsWidget::FittsWidget(QWidget *p) {
     setMouseTracking(true);
+    timer = QTime();
     update();
 }
 
@@ -44,7 +45,8 @@ void FittsWidget::mousePressEvent(QMouseEvent * e) {
     bool hit = false;
 
     if (clicks == 0) {
-        //start clock
+        elapsed = 0;
+        timer.start();
     }
 
     clicks++;
@@ -52,10 +54,12 @@ void FittsWidget::mousePressEvent(QMouseEvent * e) {
     if (A.contains(e->pos()) || B.contains(e->pos())) {
         hit = true;
         hits++;
-        // Stop timer, record time, restart timer.
+        elapsed = timer.restart();
+    } else {
+        elapsed = timer.elapsed();
     }
 
-    emit buttonClicked (e->pos(), tempClock, hit);
+    emit buttonClicked (e->pos(), elapsed, hit);
     
     if (expSettings.getMethod() == ExperimentSettings::BYCLICKS) {
         if (clicks >= expSettings.getMax()) {
