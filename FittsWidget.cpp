@@ -11,8 +11,8 @@ void FittsWidget::runExperiment(ExperimentSettings e) {
     expSettings = e;
     QDesktopWidget widget;
     QRect scrSize = widget.availableGeometry(widget.primaryScreen());
-    A = QRect(scrSize.width() /2 - e.getDistance()/2, scrSize.height() /2, e.getSize(), 40);
-    B = QRect(scrSize.width() /2 + e.getDistance()/2, scrSize.height() /2, e.getSize(), 40);
+    A = QRect(scrSize.width() /2 - e.getDistance()/2 - e.getSize() / 2, scrSize.height() /2, e.getSize(), 40);
+    B = QRect(scrSize.width() /2 + e.getDistance()/2 - e.getSize() / 2, scrSize.height() /2, e.getSize(), 40);
     hits = 0;
     clicks = 0;
     update();

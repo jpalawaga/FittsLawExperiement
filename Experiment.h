@@ -32,6 +32,11 @@ class Experiment : public QWidget {
         QString name;
         FittsWidget * widget;
         QSqlDatabase db;
+        double aVal, bVal, coeff;
+
+        void calculateValues();
+        double timeCalc(double a, double b, double D, double W);
+        double calculateX(double D, double W);
 };
 
 #endif
