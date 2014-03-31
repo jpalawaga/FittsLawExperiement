@@ -70,8 +70,8 @@ void FittsWidget::mousePressEvent(QMouseEvent * e) {
 
     if (expSettings.getMethod() == ExperimentSettings::BYHITS) {
         if (hits >= expSettings.getMax()) {
-            emit experimentComplete();
             QMessageBox::information(this, tr("Done"), tr("Test complete."));
+            emit experimentComplete();
         }
     }
     update();

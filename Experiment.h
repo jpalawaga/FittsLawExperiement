@@ -37,7 +37,7 @@ class Experiment : public QWidget {
         double aVal, bVal, coeff;
 
         void calculateValues();
-        double timeCalc(double a, double b, double D, double W);
+        double timeCalc(double D, double W);
         double calculateX(double D, double W);
 };
 

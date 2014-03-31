@@ -37,7 +37,14 @@ void Experiment::run() {
         calculateValues();
     }
     if (experimentNumber < tests.size()) {
-        widget->runExperiment(tests[experimentNumber].getSettings());
+        ExperimentSettings es = tests[experimentNumber].getSettings();
+        widget->runExperiment(es);
+        
+        if (experimentNumber >= numberOfTrainingRounds) {
+            int metronomeSpeed = (int)(60000 / timeCalc(es.getDistance(), es.getSize())); 
+            QMessageBox::information(0, "Metronome Speed", QString("Set metronome to %1 bps").arg(metronomeSpeed));
+        }
+         
         experimentNumber++;
     } else {
         QMessageBox::information(this, tr("Done"), tr("Testing is complete."));
@@ -58,6 +65,7 @@ void Experiment::calculateValues() {
      for (; j < numberOfTrainingRounds; j++) {
          test = tests[j];
          for(int i = 1 ; i < test.clicks.size(); i++) {
+             // NOTE: Omitted from this calculation: First click (0ms) and clicks following a miss.
              if ((!test.clicks[i].hit) || (!test.clicks[i-1].hit)) {
                 continue;
              }
@@ -89,8 +97,8 @@ void Experiment::calculateValues() {
           qDebug() << "A: " << aVal << " B: " << bVal << " Coeff: " << coeff;
 }
 
-double Experiment::timeCalc(double a, double b, double D, double W) {
-   return (a + (b * ( calculateX(D, W) ) ) );
+double Experiment::timeCalc(double D, double W) {
+   return (aVal + (bVal * ( calculateX(D, W) ) ) );
 }
 
 // Helper function to isolate the calculation of x based on D and W for
