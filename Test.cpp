@@ -17,10 +17,12 @@ void Test::insertClick(QPoint p, int time, bool hit) {
     DataPoint temp(p, time, hit);
     clicks.push_back(temp);
     numberOfClicks++;
-    numberOfHits = (hit) ? numberOfHits++ : numberOfHits;
+    if (hit)
+        numberOfHits++;
 }
 
 double Test::getAccuracy() {
-    return (numberOfHits / numberOfClicks);
+    qDebug() << numberOfHits << " / " << numberOfClicks;
+    return numberOfHits * 1.0  / numberOfClicks;
 }
 

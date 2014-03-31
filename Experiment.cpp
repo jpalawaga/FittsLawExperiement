@@ -36,7 +36,7 @@ void Experiment::run() {
     if (experimentNumber > 0) {
         if (db.open()) {
             QSqlQuery query(db);
-            QString q = QString("INSERT INTO testAccuracy VALUES(%1, %2, %3)").arg(volunteerId).arg(experimentNumber-1).arg(tests[experimentNumber].getAccuracy());
+            QString q = QString("INSERT INTO testAccuracy VALUES(%1, %2, %3)").arg(volunteerId).arg(experimentNumber-1).arg(tests[experimentNumber-1].getAccuracy());
             query.exec(q);
             // @TODO Proper error handling
             //qDebug() << q;

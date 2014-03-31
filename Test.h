@@ -4,7 +4,7 @@
 #include "DataPoint.h"
 #include <QVector>
 #include "ExperimentSettings.h"
-
+#include <QtGui>
 class QPoint;
 
 class Test {
