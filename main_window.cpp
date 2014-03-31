@@ -25,7 +25,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     connect(fWid, SIGNAL(experimentComplete()), experiment, SLOT(run()));
     connect(fWid, SIGNAL(buttonClicked(QPoint, int, bool)), experiment, SLOT(registerClick(QPoint, int, bool)));
 
-//@TODO Output accuracy absed on number of clicks vs number of successful clicks.
     ExperimentSettings exp("Training", 100, 150, ExperimentSettings::BYHITS, 25);
     ExperimentSettings exp1("Training 2", 100, 300, ExperimentSettings::BYHITS, 25);
     ExperimentSettings exp2("Test 1", 100, 250, ExperimentSettings::BYCLICKS, 10);
