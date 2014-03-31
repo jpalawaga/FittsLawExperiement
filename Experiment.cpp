@@ -33,9 +33,33 @@ Experiment::Experiment(FittsWidget * fw, QSqlDatabase database) {
 }
 
 void Experiment::run() {
-    if (experimentNumber == numberOfTrainingRounds) {
-        calculateValues();
+    if (experimentNumber > 0) {
+        if (db.open()) {
+            QSqlQuery query(db);
+            QString q = QString("INSERT INTO testAccuracy VALUES(%1, %2, %3)").arg(volunteerId).arg(experimentNumber-1).arg(tests[experimentNumber].getAccuracy());
+            query.exec(q);
+            // @TODO Proper error handling
+            //qDebug() << q;
+            //QSqlError e = query.lastError();
+            //qDebug() << e.text();
+            query.clear();
+        }
     }
+        
+        if (experimentNumber == numberOfTrainingRounds) {
+        calculateValues();
+        if (db.open()) {
+            QSqlQuery query(db);
+            QString q = QString("UPDATE volunteers SET a=%1, b=%2, coeff=%3 WHERE id=%4").arg(aVal).arg(bVal).arg(coeff).arg(volunteerId);
+            query.exec(q);
+            // @TODO Proper error handling
+            //qDebug() << q;
+            //QSqlError e = query.lastError();
+            //qDebug() << e.text();
+            query.clear();
+        }
+    }
+
     if (experimentNumber < tests.size()) {
         ExperimentSettings es = tests[experimentNumber].getSettings();
         widget->runExperiment(es);

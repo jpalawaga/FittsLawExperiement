@@ -10,10 +10,17 @@ Test::Test() {
 
 Test::Test(ExperimentSettings e) {
     expSettings = e;
+    numberOfClicks = numberOfHits = 0;
 }
 
 void Test::insertClick(QPoint p, int time, bool hit) {
     DataPoint temp(p, time, hit);
     clicks.push_back(temp);
+    numberOfClicks++;
+    numberOfHits = (hit) ? numberOfHits++ : numberOfHits;
+}
+
+double Test::getAccuracy() {
+    return (numberOfHits / numberOfClicks);
 }
 

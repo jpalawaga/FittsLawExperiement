@@ -15,9 +15,12 @@ class Test {
         QVector<DataPoint> clicks;
         void insertClick(QPoint p, int time, bool h);
         ExperimentSettings getSettings() { return expSettings; }
+        double getAccuracy();
 
     private:
         ExperimentSettings expSettings;
+        int numberOfClicks;
+        int numberOfHits;
 };
 
 #endif
