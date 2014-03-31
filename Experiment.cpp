@@ -10,6 +10,7 @@ Experiment::Experiment(FittsWidget * fw, QSqlDatabase database) {
     db = database;
     widget = fw;
     experimentNumber = 0;
+    numberOfTrainingRounds = 0;
     volunteerId = 0;
     aVal = 0;
     bVal = 0;
@@ -32,7 +33,7 @@ Experiment::Experiment(FittsWidget * fw, QSqlDatabase database) {
 }
 
 void Experiment::run() {
-    if (experimentNumber == 2) {
+    if (experimentNumber == numberOfTrainingRounds) {
         calculateValues();
     }
     if (experimentNumber < tests.size()) {
@@ -44,18 +45,17 @@ void Experiment::run() {
 }
 
 void Experiment::calculateValues() {
-//     Test test = tests[0];
-Test test;
-int j = 0;
-
-     double sumx = 0;
+    Test test;
+    int j = 0;
+     
+    double sumx = 0;
      double sumy = 0;
      double sumXxY = 0;
      double sumX2 = 0;
      double sumY2 = 0;  
      int n = 0;  // Initialize variables for use in the following calculation 
      
-     for (; j < 2; j++) {
+     for (; j < numberOfTrainingRounds; j++) {
          test = tests[j];
          for(int i = 1 ; i < test.clicks.size(); i++) {
              if ((!test.clicks[i].hit) || (!test.clicks[i-1].hit)) {
@@ -99,9 +99,15 @@ double Experiment::calculateX(double D, double W){
     return log2( 1.0 + ( (D) / W) );
 }
 
-void Experiment::addExperiment(ExperimentSettings s) {
+void Experiment::addTestTrial(ExperimentSettings s) {
     Test t(s);
     tests.push_back(t);
+}
+
+void Experiment::addTrainingTrial(ExperimentSettings s) {
+    Test t(s);
+    tests.insert(numberOfTrainingRounds, s);
+    numberOfTrainingRounds++;
 }
 
 void Experiment::registerClick(QPoint p, int t, bool h) {

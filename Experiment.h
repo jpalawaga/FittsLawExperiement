@@ -19,13 +19,15 @@ class Experiment : public QWidget {
         Experiment(FittsWidget * fw, QSqlDatabase db);
         QVector<Test> tests;
 
-        void addExperiment(ExperimentSettings settings);
+        void addTestTrial(ExperimentSettings settings);
+        void addTrainingTrial(ExperimentSettings settings);
 
     public slots:
         void run();
         void registerClick(QPoint p, int t, bool h);
 
     private:
+        int numberOfTrainingRounds;
         int experimentNumber;
         int volunteerId;
         QSqlQuery query;
