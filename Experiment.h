@@ -21,6 +21,7 @@ class Experiment : public QWidget {
 
         void addTestTrial(ExperimentSettings settings);
         void addTrainingTrial(ExperimentSettings settings);
+        double calculateX(double D, double W);
 
     public slots:
         void run();
@@ -38,7 +39,6 @@ class Experiment : public QWidget {
 
         void calculateValues();
         double timeCalc(double D, double W);
-        double calculateX(double D, double W);
 };
 
 #endif
